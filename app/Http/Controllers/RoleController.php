@@ -112,4 +112,12 @@ class RoleController extends Controller
 
         return redirect()->route('roles.index');
     }
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Role::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Role deleted successfully."]);
+         
+    }
 }

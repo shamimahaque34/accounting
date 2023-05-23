@@ -31,26 +31,26 @@
                                         @method('put')
                                         @endif
                                         
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6 mx-auto">
                                             <label class="form-label">Name</label>
                                             <input type="text" class="form-control rounded-lg" name="name"  data-provide="typeahead" id="the-basics" placeholder="Enter Name" value="{{$category->name}}">
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6 mx-auto">
                                             <label class="form-label">Type</label>
                                             <input type="text" class="form-control rounded-lg" name="type"  data-provide="typeahead" id="the-basics" placeholder="Enter Type" value="{{$category->type}}">
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6 mx-auto">
                                             <label class="form-label">Color</label>
-                                            <input type="text" class="form-control rounded-lg" name="color"  data-provide="typeahead" id="the-basics" placeholder="Enter Phone" value="{{$category->color}}">
+                                            <input type="text" class="form-control rounded-lg" name="color"  data-provide="typeahead" id="the-basics" placeholder="Enter Color" value="{{$category->color}}">
                                         </div>
 
                                         
 
                                         <div class="mb-3 float-end">
                                           
-                                            <a href="{{route('categories.index')}}" class="btn">Cancel</a>
+                                            <a href="{{route('categories.index')}}" class="btn btn-info">Cancel</a>
                                             <input type="submit" class="btn btn-success" data-provide="typeahead" id="" value="Save">
                                         </div>
                                     </form>

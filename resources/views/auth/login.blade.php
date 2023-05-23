@@ -32,7 +32,12 @@
                 </label>
             </div>
 
+            
+
             <div class="flex items-center justify-end mt-4">
+
+                <a class="btn btn-success mr-6" style="background-color: black;color:white; padding:4px; border-radius: 6px;margin-right:20px;" title="" href="{{ route('registrations.add') }}"> {{ __('Registration') }}</a> 
+
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}

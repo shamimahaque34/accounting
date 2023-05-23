@@ -102,6 +102,14 @@ class ExpenseController extends Controller
         return redirect()->route('expenses.index')->with('success','Expense Delete successfully');
     }
 
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Expense::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Expense deleted successfully."]);
+         
+    }
+
     public function exportExpense(){
         return Excel::download(new ExpenseExport,'expenses.xlsx');
      }

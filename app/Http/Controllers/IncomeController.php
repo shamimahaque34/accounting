@@ -102,6 +102,14 @@ class IncomeController extends Controller
         return redirect()->route('incomes.index')->with('success','Income Delete successfully');
     }
 
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Income::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Income deleted successfully."]);
+         
+    }
+
     public function exportIncome(){
         return Excel::download(new IncomeExport,'incomes.xlsx');
      }

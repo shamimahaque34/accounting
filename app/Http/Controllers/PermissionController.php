@@ -100,5 +100,15 @@ class PermissionController extends Controller
         $permission->delete();
 
         return back();
+
+
+    }
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Permission::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Permission deleted successfully."]);
+         
     }
 }

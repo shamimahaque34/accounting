@@ -98,6 +98,14 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success','Category Delete successfully');
     }
 
+    public function deleteMultipleCategory(Request $request)
+    {
+        $ids = $request->ids;
+        Category::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Category deleted successfully."]);
+         
+    }
+
 
     public function exportCategory(){
         return Excel::download(new CategoryExport,'categories.xlsx');

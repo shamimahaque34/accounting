@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
-{
+{    protected static $user;
+    
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -26,7 +28,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password'
+        
     ];
 
     /**
@@ -58,4 +61,34 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public static function updateUser($request, $id)
+    {
+        self::$user = User::find($id);
+        self::$user->name   = $request->name;
+        self::$user->email   = $request->email;
+        if (isset($request->password))
+        {
+            self::$user->password   = Hash::make($request->password);
+        }
+        self::$user->roles()->sync($request->roles);
+    }
+
+    public  static function  saveData($request)
+    {
+        self::$user = User::create([
+            'name'  => $request->name,
+            'email'  => $request->email,
+            'password'  => Hash::make($request->password),
+        ]);
+        return self::$user;
+    }
+
+    public function roles ()
+    {
+        return $this->belongsToMany(Role::class);
+
+    }
+
+    
 }

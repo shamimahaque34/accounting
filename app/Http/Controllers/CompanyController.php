@@ -16,9 +16,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        
-                 return view('backend.company.manage',[
-                'companies'=>Company::orderBy('id', 'desc')->take(500)->get()]);
+        return view('backend.company.manage',[
+        'companies'=>Company::orderBy('id', 'desc')->take(500)->get()]);
                
         
     }
@@ -97,5 +96,14 @@ class CompanyController extends Controller
 
         $this->company->delete();
         return redirect()->route('companies.index')->with('success','Company Delete successfully');
+    }
+
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Company::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Company deleted successfully."]);
+         
     }
 }

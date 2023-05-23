@@ -105,6 +105,14 @@ class CustomerController extends Controller
         return redirect()->route('customers.index')->with('success','Customer Delete successfully');
     }
 
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Customer::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Customer deleted successfully."]);
+         
+    }
+
 
     public function exportCustomer(){
         return Excel::download(new CustomerExport,'customers.xlsx');

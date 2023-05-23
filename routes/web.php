@@ -12,6 +12,13 @@ use App\Http\Controllers\TaxController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyIbsController;
+use App\Http\Controllers\InvoiceController;
+use App\Models\Invoice;
+
+use Illuminate\Http\Request;
 
 
 /*
@@ -29,8 +36,22 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('registrations.add', 'App\Http\Controllers\RegisterController@create')->name('registrations.add');
+Route::post('registrations.store', 'App\Http\Controllers\RegisterController@store')->name('registrations.store');
+
+
+
+
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard', function () { return view('backend.home.dashboard');})->name('dashboard');
+
+    Route::get('registrations', 'App\Http\Controllers\RegisterController@index')->name('registrations');
+Route::get('registrations.destroy/{id}', 'App\Http\Controllers\RegisterController@destroy')->name('registrations.destroy');
+Route::get('/user-add/{id}', [
+    'uses' => 'App\Http\Controllers\UserController@add',
+    'as'   => 'users.add',
+]);
+    Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('companies', CompanyController::class);
@@ -42,6 +63,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::resource('items', ItemController::class);
     Route::resource('incomes', IncomeController::class);
     Route::resource('expenses', ExpenseController::class);
+    Route::resource('company_ibses', CompanyIbsController::class);
+    Route::resource('invoices', InvoiceController::class);
+
+
 
 
     Route::get('items-export', 'App\Http\Controllers\ItemController@exportItem')->name('items-export');
@@ -81,10 +106,49 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::get('expensedownloadPDF/{id}', 'App\Http\Controllers\ExpenseController@downloadPDF')->name('expensedownloadPDF');
     
 
+    
+    Route::get('invoices-export', 'App\Http\Controllers\InvoiceController@exportInvoice')->name('invoices-export');
+    Route::get('invoice-import', 'App\Http\Controllers\InvoiceController@import')->name('invoice-import');
+    Route::post('invoices-import', 'App\Http\Controllers\InvoiceController@importInvoice')->name('invoices-import');
+    Route::get('invoicedownloadPDF/{id}', 'App\Http\Controllers\InvoiceController@downloadPDF')->name('invoicedownloadPDF');
 
+    Route::get('customer-detail', 'App\Http\Controllers\InvoiceController@customerDetail')->name('customer-detail');
 
+    Route::get('send-mail/{id}', 'App\Http\Controllers\InvoiceController@sendMail')->name('send-mail');
+    
+    
+    Route::delete('/delete-multiple-invoice','App\Http\Controllers\InvoiceController@deleteMultiple')->name('invoice.delete-multiple-invoice');
 
+    Route::delete('/delete-multiple-category','App\Http\Controllers\CategoryController@deleteMultiple')->name('category.delete-multiple-category');
 
+    // Route::delete('/delete-multiple-category', [
+    //     'uses' => '\App\Http\Controllers\CategoryController@deleteMultipleCategory',
+    //     'as' => 'category.delete-multiple-category',
+    // ]);
 
+    Route::delete('/delete-multiple-company','App\Http\Controllers\CompanyController@deleteMultiple')->name('company.delete-multiple-company');
 
+    Route::delete('/delete-multiple-company-ibs','App\Http\Controllers\CompanyIbsController@deleteMultiple')->name('company-ibs.delete-multiple-company-ibs');
+
+    Route::delete('/delete-multiple-currency','App\Http\Controllers\CurrencyController@deleteMultiple')->name('currency.delete-multiple-currency');
+
+    Route::delete('/delete-multiple-customer','App\Http\Controllers\CustomerController@deleteMultiple')->name('customer.delete-multiple-customer');
+
+    Route::delete('/delete-multiple-expense','App\Http\Controllers\ExpenseController@deleteMultiple')->name('expense.delete-multiple-expense');
+
+    Route::delete('/delete-multiple-income','App\Http\Controllers\IncomeController@deleteMultiple')->name('income.delete-multiple-income');
+
+    Route::delete('/delete-multiple-vendor','App\Http\Controllers\VendorController@deleteMultiple')->name('vendor.delete-multiple-vendor');
+
+    Route::delete('/delete-multiple-item','App\Http\Controllers\ItemController@deleteMultiple')->name('item.delete-multiple-item');
+
+    Route::delete('/delete-multiple-permission','App\Http\Controllers\PermissionController@deleteMultiple')->name('permission.delete-multiple-permission');
+
+    Route::delete('/delete-multiple-role','App\Http\Controllers\RoleController@deleteMultiple')->name('role.delete-multiple-role');
+
+    Route::delete('/delete-multiple-register','App\Http\Controllers\RegisterController@deleteMultiple')->name('register.delete-multiple-register');
+
+    Route::delete('/delete-multiple-user','App\Http\Controllers\UserController@deleteMultiple')->name('user.delete-multiple-user');
+
+    Route::delete('/delete-multiple-tax','App\Http\Controllers\TaxController@deleteMultiple')->name('tax.delete-multiple-tax');
 });

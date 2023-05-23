@@ -17,36 +17,36 @@
                         <div class="card mt-3">
                             <div class="card-header">
                                 <h4 class="float-start" style="font-weight:700;">New Category</h4>
-                                <!-- <a href="{{ route('companies.index') }}" class="btn btn-success float-end">
-                                    Manage Company
+                                 <a href="{{ route('categories.index') }}" class="btn btn-success float-end">
+                                    Manage Category
 
-                                </a> -->
+                                </a>
                             </div>
                             <div class="card-body">
                                 <div>
                                     <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6 mx-auto">
                                             <label class="form-label">Name</label>
                                             <input type="text" class="form-control rounded-lg" name="name" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Name">
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6 mx-auto">
                                             <label class="form-label">Type</label>
                                             <input type="text" class="form-control rounded-lg" name="type" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Type">
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6 mx-auto">
                                             <label class="form-label">Color</label>
-                                            <input type="text" class="form-control rounded-lg" name="color" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Phone">
+                                            <input type="text" class="form-control rounded-lg" name="color" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Color">
                                         </div>
 
                                         
 
                                         <div class="mb-3 float-end">
                                           
-                                            <a href="{{route('categories.index')}}" class="btn">Cancel</a>
+                                            <a href="{{route('categories.index')}}" class="btn btn-info">Cancel</a>
                                             <input type="submit" class="btn btn-success" data-provide="typeahead" id="" value="Save">
                                         </div>
                                     </form>

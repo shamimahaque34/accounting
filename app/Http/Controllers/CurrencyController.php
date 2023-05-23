@@ -92,4 +92,12 @@ class CurrencyController extends Controller
         $this->currency->delete();
         return redirect()->route('currencies.index')->with('success','Currency Delete successfully');
     }
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Currency::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Currency deleted successfully."]);
+         
+    }
 }

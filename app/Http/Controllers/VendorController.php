@@ -129,4 +129,12 @@ class VendorController extends Controller
          return redirect()->route('vendors.index')->with('success',' Vendor Downloaded successfully');
  
  }
+
+ public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Vendor::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Vendor deleted successfully."]);
+         
+    }
 }

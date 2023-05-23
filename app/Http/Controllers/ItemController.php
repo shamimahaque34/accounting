@@ -107,6 +107,14 @@ class ItemController extends Controller
         return redirect()->route('items.index')->with('success','Item Delete successfully');
     }
 
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Item::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Item deleted successfully."]);
+         
+    }
+
     public function exportItem(){
        return Excel::download(new ItemsExport,'items.xlsx');
     }

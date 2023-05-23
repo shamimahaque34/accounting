@@ -17,45 +17,46 @@
                         <div class="card mt-3">
                             <div class="card-header">
                                 <h4 class="float-start" style="font-weight:700;">New Item</h4>
-                                <!-- <a href="{{ route('companies.index') }}" class="btn btn-success float-end">
-                                    Manage Company
+                               <a href="{{ route('items.index') }}" class="btn btn-success float-end">
+                                    Manage Item
 
-                                </a> -->
+                                </a>
                             </div>
                             <div class="card-body">
                                 <div>
                                     <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        
-                                        <div class="mb-3 col-md-4">
+                                       
+                                        <div class="row mx-auto">
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">Name</label>
                                             <input type="text" class="form-control rounded-lg" name="name" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Name">
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">Sku</label>
                                             <input type="text" class="form-control rounded-lg" name="sku" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Sku">
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">Sale Price</label>
                                             <input type="text" class="form-control rounded-lg" name="sale_price" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Sale Price">
                                         </div>
 
                                        
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">Purchase Price</label>
                                             <input type="text" class="form-control rounded-lg" name="purchase_price" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Purchase Price">
                                         </div>
 
                                         
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">Quantity</label>
                                             <input type="text" class="form-control rounded-lg" name="quantity" value="" data-provide="typeahead" id="the-basics" placeholder="Enter Quantity">
                                         </div>
 
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">Category</label>
                                             <select class="form-control" name="category_id" required >
                                                <option value="" selected disabled>-- Select Category Name --</option>
@@ -65,7 +66,7 @@
                                           </select>                                        
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-6">
                                             <label class="form-label">Tax</label>
                                             <select class="form-control" name="tax_id" required >
                                                <option value="" selected disabled>-- Select tax Name --</option>
@@ -75,16 +76,17 @@
                                           </select>                                        
                                         </div>
 
-                                        <div class="mb-3 col-md-4">
+                                        <div class="mb-3 col-md-12">
                                             <label class="form-label">Description</label>
                                             <textarea name="description" id="editor" cols="20" rows="5" class="form-control" value=""></textarea>
                                         </div>
 
                                         <div class="mb-3 float-end">
                                           
-                                            <a href="{{route('companies.index')}}" class="btn">Cancel</a>
+                                            <a href="{{route('items.index')}}" class="btn btn-info">Cancel</a>
                                             <input type="submit" class="btn btn-success" data-provide="typeahead" id="" value="Save">
                                         </div>
+                                    </div>
                                     </form>
                                 </div>
                             </div>

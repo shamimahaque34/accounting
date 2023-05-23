@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('title')
-    Dashboard | Limelight
+    Dashboard | Accounting
 @endsection
 
 @section('body-title-section')

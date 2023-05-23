@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_bangla');
             $table->string('email');
             $table->string('logo');
             $table->string('phone');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('town');
             $table->string('postal_code');
             $table->string('state');
+            $table->string('website');
             $table->string('country');
             $table->boolean('enabled')->default(1);
             $table->timestamps();

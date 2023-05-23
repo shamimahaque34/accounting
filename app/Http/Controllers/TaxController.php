@@ -99,6 +99,15 @@ class TaxController extends Controller
         return redirect()->route('taxes.index')->with('success','Tax Delete successfully');
     }
 
+
+    public function deleteMultiple(Request $request)
+    {
+        $ids = $request->ids;
+        Tax::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'success'=>"Tax deleted successfully."]);
+         
+    }
+
     public function exportTax(){
         return Excel::download(new TaxExport,'taxes.xlsx');
      }

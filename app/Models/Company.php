@@ -11,6 +11,7 @@ class Company extends Model
 
     protected $fillable = [
         'name',
+        'name_bangla',
         'email',
         'logo',
         'phone',
@@ -19,6 +20,7 @@ class Company extends Model
         'language_id',
         'address',
         'town',
+        'website',
         'postal_code',
         'state',
         'country',
@@ -42,6 +44,7 @@ class Company extends Model
     public static function insertData($request,  $company= null)
     {   
         self::  $company->name          = $request->name;
+        self::  $company->name_bangla   = $request->name_bangla;
         self::  $company->email         = $request->email;
         self::  $company->logo          = isset($company) ? saveImage($request->file('logo'),'./backend/assets/image/CompanyLogos/','logo',self::$company->logo,) : saveImage($request->file('logo'),'./backend/assets/image/CompanyLogos/','logo','',);
         self::  $company->phone         = $request->phone;
@@ -50,6 +53,7 @@ class Company extends Model
         self::  $company->language_id   = $request->language_id;
         self::  $company->address       = $request->address;
         self::  $company->town          = $request->town;
+        self::  $company->website       = $request->website;
         self::  $company->postal_code   = $request->postal_code;
         self::  $company->state         = $request->state;
         self::  $company->country       = $request->country;
